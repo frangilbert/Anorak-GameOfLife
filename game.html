@@ -1,0 +1,51 @@
+<html>
+<head>
+	<style>
+		table#board{width:100%;}
+		
+		td{width:1%; background-color:lightgray; }
+		
+		td.alive{background-color:black;}
+		
+		tr{height:10px;}
+		
+		
+	</style>
+</head>
+<body>
+	<script type="text/html" id="rowTemplate">
+		<tr data-bind="foreach: $data">
+			<td data-bind="css: {alive: alive}"></td>
+			
+		</tr>
+	</script>
+	<table id="board" data-bind="template:{name:'rowTemplate', foreach: cells}">
+		
+	</table>
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+	<script src="js/knockout.js"></script>
+	<script>
+		var gridSize = 100;
+		
+	     var ViewModel = {
+			cells : []
+		 };
+
+		 function Cell(x, y, alive)
+		 {
+			var self = this;
+
+			self.x = x;
+			self.y = y;
+			self.alive = ko.observable(alive);
+			self.neighbours = [];
+			self.willBeAlive = self.alive();			
+		 }
+		
+		
+
+		ko.applyBindings(ViewModel);
+	</script>
+</body>
+
+</html>
